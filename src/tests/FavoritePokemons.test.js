@@ -37,11 +37,19 @@ describe('Testa página Favorite Pokemons', () => {
     userEvent.click(buttonElementPokemon);
     userEvent.click(moreDetails);
 
-    const buttonFavoritePokemon = screen.getByRole('checkbox', {
+    const buttonFavorite = screen.getByRole('checkbox', {
       name: /pokémon favoritado\?/i,
     });
-    userEvent.click(buttonFavoritePokemon);
 
-    expect(buttonFavoritePokemon).toBeChecked(true);
+    expect(buttonFavorite).toBeInTheDocument();
+    userEvent.click(buttonFavorite);
+
+    const pokemonName = screen.getByTestId('pokemon-name').textContent;
+
+    const favoriteStart = screen.getByRole('img', {
+      name: `${pokemonName} is marked as favorite`,
+    });
+
+    expect(favoriteStart).toBeInTheDocument();
   });
 });
