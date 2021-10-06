@@ -20,13 +20,13 @@ describe('Testa componente notFound ', () => {
     expect(cryingEmoji).toBeInTheDocument();
   });
 
-  it('Teste se página mostra a imagem https://media.giphy.com/media/kNSeTs31XBZ3G/giphy.gif', () => {
+  it('Teste se página mostra a imagem "https://cdn2.bulbagarden.net/upload/b/b2/Spr_5b_025_m.png"', () => {
     renderWithRouter(<NotFound />);
 
     const imageCrying = screen.getByRole('img', {
       name: /pikachu crying because the page requested was not found/i,
     });
 
-    expect(imageCrying).toBeInTheDocument();
+    expect(imageCrying).toHaveAttribute('src', 'https://media.giphy.com/media/kNSeTs31XBZ3G/giphy.gif');
   });
 });
