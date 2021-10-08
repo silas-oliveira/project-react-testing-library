@@ -20,7 +20,7 @@ describe('Testa componente notFound ', () => {
     expect(cryingEmoji).toBeInTheDocument();
   });
 
-  it('Teste se página mostra a imagem "https://cdn2.bulbagarden.net/upload/b/b2/Spr_5b_025_m.png"', () => {
+  it('Teste se página mostra a imagem "hhttps://media.giphy.com/media/kNSeTs31XBZ3G/giphy.gif"', () => {
     renderWithRouter(<NotFound />);
 
     const imageCrying = screen.getByRole('img', {
