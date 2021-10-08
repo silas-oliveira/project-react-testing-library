@@ -6,7 +6,6 @@ import App from '../App';
 import renderWithRouter from './utils/renderWithRouter';
 
 import pokemons from '../data';
-import { Pokedex } from '../components';
 
 describe('Testa o componente "Pokedex"', () => {
   it('Testa se página contém um heading h2 com o texto Encountered pokémons', () => {
@@ -62,9 +61,11 @@ describe('Testa o componente "Pokedex"', () => {
 
       const pokemonName = screen.getByText(pokemon.name);
 
-      const dataTestIdPokemon = screen.getByTestId(pokemon.name);
+      const dataTestIdButton = screen.getByRole('button', {
+        name: /electric/i,
+      });
 
-      expect(dataTestIdPokemon).toBeInTheDocument();
+      expect(dataTestIdButton).toHaveAttribute('data-testid', 'pokemon-type-button');
 
       acc.push(pokemon.name);
 
@@ -76,6 +77,23 @@ describe('Testa o componente "Pokedex"', () => {
     }, []);
 
     const firstPokemon = screen.getByText('Pikachu');
+
+    expect(firstPokemon).toBeInTheDocument();
+  });
+
+  it(`A Pokedéx deverá mostrar os Pokémons normalmente (sem filtros)
+  quando o botão All for clicado`, () => {
+    renderWithRouter(<MemoryRouter><App /></MemoryRouter>);
+
+    const buttonAll = screen.getByRole('button', {
+      name: /all/i,
+    });
+
+    userEvent.click(buttonAll);
+
+    const firstPokemon = screen.getByRole('img', {
+      name: /pikachu sprite/i,
+    });
 
     expect(firstPokemon).toBeInTheDocument();
   });
